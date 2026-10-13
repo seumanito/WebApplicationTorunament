@@ -11,3 +11,6 @@ Python/FastAPI: Login/Register of teams and solo players
 Node.js Express: For the record of fights, statistics like characters, damage inflicted, and duration of these 
 Java Spring Boot: To generate brackets for the random fights
 Go Gin/net-http: Real time scoreboard
+
+Utilizamos feature/mi-rama para agregar contenido, asi como los commit types: chore, docs, test, build...
+Recuerda usar pip install -r requirements.txt en servicio-python para tener las mismas versiones de lo que instalamos
