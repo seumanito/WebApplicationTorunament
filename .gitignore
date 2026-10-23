@@ -2,3 +2,6 @@
 venv/
 torneo.db
 __pycache__/
+node_modules/
+npm-debug.log
+*.log
