@@ -3,5 +3,7 @@ venv/
 torneo.db
 __pycache__/
 node_modules/
+*$py.class
+*.py[cod]
 npm-debug.log
 *.log
