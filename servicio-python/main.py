@@ -1,42 +1,32 @@
-from fastapi import FastAPI
-from pydantic import BaseModel
-from sqlalchemy import create_engine, Column, Integer, String
-from sqlalchemy.orm import declarative_base, Session
+from fastapi import FastAPI, HTTPException
+from database import engine, Base, SessionLocal
+import models
+import schemas
 
-DATABASE_URL = "sqlite:///torneo.db"
-engine = create_engine(DATABASE_URL, connect_args={"check_same_thread": False})
-Base = declarative_base()
-
-class JugadorDB(Base):
-    __tablename__ = "jugadores"
-    id = Column(Integer, primary_key=True, autoincrement=True)
-    nombre = Column(String, nullable=False)
-    equipo = Column(String, nullable=False)
-
-Base.metadata.create_all(bind=engine)
-
-class Jugador(BaseModel):
-    nombre: str
-    equipo: str
+models.Base.metadata.create_all(bind=engine)
 
 app = FastAPI()
 
-@app.post("/jugadores")
-def inscribir_jugador(participante: Jugador):
-    db=Session(engine)
+@app.post("/jugadores", response_model=schemas.JugadorRespuesta)
+def crear_jugador(jugador: schemas.JugadorCrear):
+    db = SessionLocal()
     try:
-        jugador_guardar=JugadorDB(nombre=participante.nombre,equipo=participante.equipo)
-        db.add(jugador_guardar)
-        db.commit() 
-        return {"mensaje": "Jugador Guardado"}
+        nuevo_jugador = models.JugadorDB(**jugador.dict())
+        db.add(nuevo_jugador)
+        db.commit()
+        db.refresh(nuevo_jugador)
+        return nuevo_jugador
+    except Exception as e:
+        db.rollback()
+        raise HTTPException(status_code=400, detail=str(e))
     finally:
         db.close()
 
 @app.get("/jugadores")
-def ver_jugadores():
-    db=Session(engine)
+def obtener_jugadores():
+    db = SessionLocal()
     try:
-        jugadores = db.query(JugadorDB).all()
-        return {"jugadores": jugadores}
+        jugadores = db.query(models.JugadorDB).all()
+        return jugadores
     finally:
         db.close()
