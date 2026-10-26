@@ -1,5 +1,5 @@
 fastapi
-uvicorn[standard]
-sqlalchemy
+uvicorn
+PyJWT
+pydantic
 psycopg2-binary
-python-dotenv

@@ -2,10 +2,13 @@ from fastapi import FastAPI, HTTPException
 from database import engine, Base, SessionLocal
 import models
 import schemas
+from JWT import router as jwt_router
 
 models.Base.metadata.create_all(bind=engine)
 
 app = FastAPI()
+
+app.include_router(jwt_router)
 
 @app.post("/jugadores", response_model=schemas.JugadorRespuesta)
 def crear_jugador(jugador: schemas.JugadorCrear):
