@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Torneos - Inicio</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="landing.css">
+</head>
+<body>
+    <header class="navbar">
+        <h2 class="nav-title">Arena Tournaments</h2>
+        <nav>
+            <a href="login.html" class="btn-primary btn-nav">Iniciar Sesion</a>
+        </nav>
+    </header>
+
+    <main class="main-container">
+        <div class="hero">
+            <h1>Bienvenido a la Plataforma de Torneos Poliglota</h1>
+            <p>Gestiona, compite y administra torneos potenciados por una arquitectura de microservicios distribuida (Python, Node.js, Go y Java).</p>
+            <a href="login.html" class="btn-primary">Acceder al Sistema</a>
+        </div>
+
+        <section class="services-section">
+            <h3 class="services-title">Servicios Activos en la Red</h3>
+            <div class="services-grid">
+                <div class="card service-card">
+                    <h4>Python</h4>
+                    <p class="service-desc">Gestion central de Torneos (PostgreSQL).</p>
+                </div>
+                <div class="card service-card">
+                    <h4>Node.js</h4>
+                    <p class="service-desc">Enfrentamientos en tiempo real (MongoDB).</p>
+                </div>
+                <div class="card service-card">
+                    <h4>Go</h4>
+                    <p class="service-desc">Registro y control de Clanes.</p>
+                </div>
+                <div class="card service-card">
+                    <h4>Java</h4>
+                    <p class="service-desc">Perfiles empresariales de Jugadores.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="card service-card">
+            <h2>Inscribir Equipo en Torneo</h2>
+            <p class="service-desc">Envía tu solicitud de inscripción al microservicio Python (:8000)</p>
+            
+            <form id="form-inscripcion" onsubmit="enviarInscripcion(event)" style="display: flex; flex-direction: column; gap: 12px; margin-top: 15px;">
+                <input type="number" id="torneoIdInput" placeholder="ID del Torneo (ej. 1)" required style="padding: 10px; background: #0d1117; border: 1px solid #30363d; color: #c9d1d9; border-radius: 6px;">
+                <input type="text" id="teamIdInput" placeholder="Nombre del Equipo / Clan" required style="padding: 10px; background: #0d1117; border: 1px solid #30363d; color: #c9d1d9; border-radius: 6px;">
+                
+                <button type="submit" class="btn-primary" style="padding: 10px; background-color: #238636; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: bold;">Solicitar Inscripción</button>
+            </form>
+            
+            <p id="mensaje-inscripcion" style="margin-top: 10px; font-size: 0.9rem;"></p>
+        </section>
+    </main>
+
+    <footer class="footer">
+        Sistema Poliglota de Torneos - Arquitectura de Software 2026
+    </footer>
+</body>
+</html>

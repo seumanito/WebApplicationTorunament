@@ -15,7 +15,7 @@ services:
       test: ["CMD-SHELL", "pg_isready -U ${DB_USER}"]
       interval: 10s
       retries: 5
-
+      
   mongodb:
     image: mongo:7.0
     ports:
@@ -56,6 +56,19 @@ services:
     depends_on:
       postgres:
         condition: service_healthy
+    networks:
+      - backend
+      - frontend
+  
+  servicio-java:
+    build: ./servicio-java
+    ports:
+      - "8005:8080"
+    environment:
+      SPRING_DATA_MONGODB_URI: ${MONGO_URL}
+    depends_on:
+      mongodb:
+        condition: service_started
     networks:
       - backend
       - frontend

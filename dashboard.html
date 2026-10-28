@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Torneos - Panel de Arquitectura</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="main-container" style="max-width: 1200px;">
+        <header class="navbar" style="padding: 20px 0; margin-bottom: 30px;">
+            <div>
+                <h1 class="nav-title" style="font-size: 1.8rem;">Panel de Control - Administrador</h1>
+                <div class="service-desc" style="margin-top: 5px;">Arquitectura de Microservicios Poliglotas y Contenedorizados</div>
+            </div>
+            <button onclick="closeSession()" class="btn-primary" style="background-color: #da3633;">Cerrar Sesion</button>
+        </header>
+
+        <main class="services-grid">
+            <section class="card service-card">
+                <h2>Python (Torneos) <span class="port-badge">:8000</span></h2>
+                <p class="service-desc">Logica Central de Torneos</p>
+                <button onclick="loadPython()" class="btn-primary" style="margin: 10px 0; width: 100%;">Consultar Torneos</button>
+                <pre id="res-python" style="background: #0d1117; padding: 10px; border-radius: 6px; font-size: 0.8rem; overflow-x: auto;">Haz clic en consultar...</pre>
+
+                <h3 class="services-title" style="font-size: 1rem; margin-top: 15px;">Registrar Torneo</h3>
+                <div class="form-group">
+                    <input type="text" id="name-tournament" placeholder="Nombre del torneo" style="width: 100%; padding: 8px; background: #0d1117; border: 1px solid #30363d; border-radius: 6px; color: white; margin-bottom: 8px;">
+                </div>
+                <div class="form-group">
+                    <input type="text" id="game-tournament" placeholder="Videojuego" style="width: 100%; padding: 8px; background: #0d1117; border: 1px solid #30363d; border-radius: 6px; color: white; margin-bottom: 8px;">
+                </div>
+                <button onclick="addPython()" class="btn-primary" style="width: 100%;">Guardar Torneo</button>
+            </section>
+
+            <section class="card service-card">
+                <h2>Node.js (Combates) <span class="port-badge">:3000</span></h2>
+                <p class="service-desc">Maneja enfrentamientos.</p>
+                <button onclick="loadNode()" class="btn-primary" style="margin: 10px 0; width: 100%;">Consultar Combates</button>
+                <pre id="res-node" style="background: #0d1117; padding: 10px; border-radius: 6px; font-size: 0.8rem; overflow-x: auto;">Haz clic en consultar...</pre>
+
+                <h3 class="services-title" style="font-size: 1rem; margin-top: 15px;">Registrar Combate</h3>
+                <div class="form-group">
+                    <input type="text" id="peleador1" placeholder="Peleador 1" style="width: 100%; padding: 8px; background: #0d1117; border: 1px solid #30363d; border-radius: 6px; color: white; margin-bottom: 8px;">
+                </div>
+                <div class="form-group">
+                    <input type="text" id="peleador2" placeholder="Peleador 2" style="width: 100%; padding: 8px; background: #0d1117; border: 1px solid #30363d; border-radius: 6px; color: white; margin-bottom: 8px;">
+                </div>
+                <button onclick="addNode()" class="btn-primary" style="width: 100%;">Guardar Combate</button>
+            </section>
+
+            <section class="card service-card">
+                <h2>Go (Equipos) <span class="port-badge">:8004</span></h2>
+                <p class="service-desc">Maneja el registro de clanes.</p>
+                <button onclick="loadGo()" class="btn-primary" style="margin: 10px 0; width: 100%;">Consultar Equipos</button>
+                <pre id="res-go" style="background: #0d1117; padding: 10px; border-radius: 6px; font-size: 0.8rem; overflow-x: auto;">Haz clic en consultar...</pre>
+
+                <h3 class="services-title" style="font-size: 1rem; margin-top: 15px;">Registrar Equipo</h3>
+                <div class="form-group">
+                    <input type="text" id="nombre-equipo" placeholder="Nombre del equipo/clan" style="width: 100%; padding: 8px; background: #0d1117; border: 1px solid #30363d; border-radius: 6px; color: white; margin-bottom: 8px;">
+                </div>
+                <div class="form-group">
+                    <input type="text" id="tag-equipo" placeholder="Tag (ej: T1, NAVI)" style="width: 100%; padding: 8px; background: #0d1117; border: 1px solid #30363d; border-radius: 6px; color: white; margin-bottom: 8px;">
+                </div>
+                <button onclick="addGo()" class="btn-primary" style="width: 100%;">Guardar Equipo</button>
+            </section>
+            <section class="card service-card">
+                <h2>Java (Jugadores) <span class="port-badge">:8005</span></h2>
+                <p class="service-desc">Perfiles con MongoDB.</p>
+                <button onclick="loadJava()" class="btn-primary" style="margin: 10px 0; width: 100%;">Listar Jugadores</button>
+                <pre id="res-java" style="background: #0d1117; padding: 10px; border-radius: 6px; font-size: 0.8rem; overflow-x: auto;">Haz clic en listar...</pre>
+                
+                <h3 class="services-title" style="font-size: 1rem; margin-top: 15px;">Registrar Jugador</h3>
+                <div class="form-group">
+                    <input type="text" id="nombre" placeholder="Nombre del jugador" style="width: 100%; padding: 8px; background: #0d1117; border: 1px solid #30363d; border-radius: 6px; color: white; margin-bottom: 8px;">
+                </div>
+                <div class="form-group">
+                    <input type="text" id="juego" placeholder="Juego o categoria" style="width: 100%; padding: 8px; background: #0d1117; border: 1px solid #30363d; border-radius: 6px; color: white; margin-bottom: 8px;">
+                </div>
+                <button onclick="addJava()" class="btn-primary" style="width: 100%;">Guardar en MongoDB</button>
+            </section>
+
+            <section class="card service-card" style="grid-column: span 2;">
+                <h2>Solicitudes de Inscripción Pendientes <span class="port-badge">:8000</span></h2>
+                <p class="service-desc">Aprobación de equipos en torneos</p>
+                
+                <button onclick="loadPendingInscriptions()" class="btn-primary" style="margin: 10px 0;">Cargar Solicitudes Pendientes</button>
+                
+                <div id="container-pendientes" style="margin-top: 15px;">
+                    <p style="color: #8b949e; font-size: 0.9rem;">Haz clic en cargar para ver las solicitudes...</p>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="auth.js"></script>
+    <script src="api.js"></script>
+</body>
+</html>
