@@ -1,13 +1,25 @@
 from pydantic import BaseModel
 
-class JugadorCrear(BaseModel):
+class TorneoCrear(BaseModel):
     nombre: str
-    equipo: str
+    juego: str
 
-class JugadorRespuesta(BaseModel):
-    id: int 
+class TorneoRespuesta(BaseModel):
+    id: int
     nombre: str
-    equipo: str
+    juego: str
 
     class Config:
         orm_mode = True
+
+class Login(BaseModel):
+    username: str
+    password: str
+
+class UserRegister(BaseModel):
+    username: str
+    password: str
+    role: str = "user"
+
+class InscripcionRequest(BaseModel):
+    team_id: str

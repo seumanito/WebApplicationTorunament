@@ -9,12 +9,13 @@ import (
 	"github.com/joho/godotenv"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
+	"github.com/gin-contrib/cors"
 )
 
 type Equipo struct {
-	gorm.Model
-	Nombre string `json:"nombre"`
-	Region string `json:"region"`
+    gorm.Model
+    TeamID   int `json:"team_id"`
+    TorneoID int `json:"torneo_id"`
 }
 
 func main() {
@@ -26,6 +27,7 @@ func main() {
 	}
 	db.AutoMigrate(&Equipo{})
 	r := gin.Default()
+	r.Use(cors.Default())
 
 	r.GET("/equipos", func(c *gin.Context) {
 		var equipos []Equipo
@@ -34,13 +36,17 @@ func main() {
 	})
 
 	r.POST("/equipos", func(c *gin.Context) {
-		var nuevo Equipo
-		if err := c.ShouldBindJSON(&nuevo); err == nil {
-			db.Create(&nuevo)
-			c.JSON(http.StatusCreated, nuevo)
-		} else {
-			c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
-		}
-	})
+    var equipo Equipo
+    if err := c.ShouldBindJSON(&equipo); err != nil {
+        c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+        return
+    }
+
+    if err := db.Create(&equipo).Error; err != nil {
+        c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+        return
+    }
+    c.JSON(http.StatusCreated, equipo)
+})
 	r.Run(":8080")
 }

@@ -1,4 +1,8 @@
-async function realizarLogin() {
+if (window.location.pathname.includes('dashboard.html') && !localStorage.getItem('token')) {
+    window.location.href = 'login.html';
+}
+
+async function doLogin() {
     const user = document.getElementById('username').value;
     const pass = document.getElementById('password').value;
     const errorMsg = document.getElementById('error-msg');
@@ -10,27 +14,22 @@ async function realizarLogin() {
             body: JSON.stringify({ username: user, password: pass })
         });
 
-        if (!res.ok) throw new Error("Credenciales inválidas");
+        if (!res.ok) throw new Error("Credenciales invalidas");
 
         const data = await res.json();
 
         localStorage.setItem('token', data.access_token);
         localStorage.setItem('role', data.role);
 
-        if (data.role === 'admin') {
-            document.getElementById('login-container').style.display = 'none';
-            document.getElementById('panel-control').style.display = 'block';
-        } else {
-            errorMsg.innerText = 'Acceso restringido: Solo el Administrador ve el panel.';
-        }
+        window.location.href = 'dashboard.html';
 
     } catch (e) {
         errorMsg.innerText = "Usuario o contraseña incorrectos";
     }
 }
 
-function cerrarSesion() {
+function closeSession() {
     localStorage.removeItem('token');
     localStorage.removeItem('role');
-    location.reload();
+    window.location.href = 'login.html'
 }

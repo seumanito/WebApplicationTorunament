@@ -3,63 +3,64 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sistema de Torneos - Panel de Arquitectura</title>
+    <title>Sistema de Torneos - Inicio</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="landing.css">
 </head>
 <body>
-    <div id="login-container" class="card" style="max-width: 400px; margin: 100px auto;">
-        <h2 style="color: #58a6ff; text-align: center;">Acceso al Sistema</h2>
-        <input type="text" id="username" placeholder="Usuario (admin / user)">
-        <input type="password" id="password" placeholder="Contraseña (123)">
-        <button onclick="realizarLogin()" style="margin-top: 15px;">Iniciar Sesión</button>
-        <p id="error-msg" style="color: #f85149; text-align: center; margin-top: 10px;"></p>
-    </div>
+    <header class="navbar">
+        <h2 class="nav-title">Arena Tournaments</h2>
+        <nav>
+            <a href="login.html" class="btn-primary btn-nav">Iniciar Sesion</a>
+        </nav>
+    </header>
 
-    <div id="panel-control" style="display: none;">
-        <header>
-            <h1>Panel de Control - Administrador</h1>
-            <button onclick="cerrarSesion()" style="background: #da3633; width: auto; padding: 5px 15px; margin-bottom: 20px;">Cerrar Sesión</button>
-            <div class="subtitle">Arquitectura de Microservicios Políglotas y Contenedorizados</div>
-        </header>
+    <main class="main-container">
+        <div class="hero">
+            <h1>Bienvenido a la Plataforma de Torneos Poliglota</h1>
+            <p>Gestiona, compite y administra torneos potenciados por una arquitectura de microservicios distribuida (Python, Node.js, Go y Java).</p>
+            <a href="login.html" class="btn-primary">Acceder al Sistema</a>
+        </div>
 
-        <main class="grid">
-            <section class="card">
-                <h2>Python (Torneos) <span class="port-badge">:8000</span></h2>
-                <p>Maneja la lógica central.</p>
-                <button onclick="cargarPython()">Consultar Datos</button>
-                <pre id="res-python">Haz clic en consultar...</pre>
-            </section>
+        <section class="services-section">
+            <h3 class="services-title">Servicios Activos en la Red</h3>
+            <div class="services-grid">
+                <div class="card service-card">
+                    <h4>Python</h4>
+                    <p class="service-desc">Gestion central de Torneos (PostgreSQL).</p>
+                </div>
+                <div class="card service-card">
+                    <h4>Node.js</h4>
+                    <p class="service-desc">Enfrentamientos en tiempo real (MongoDB).</p>
+                </div>
+                <div class="card service-card">
+                    <h4>Go</h4>
+                    <p class="service-desc">Registro y control de Clanes.</p>
+                </div>
+                <div class="card service-card">
+                    <h4>Java</h4>
+                    <p class="service-desc">Perfiles empresariales de Jugadores.</p>
+                </div>
+            </div>
+        </section>
 
-            <section class="card">
-                <h2>Node.js (Combates) <span class="port-badge">:3000</span></h2>
-                <p>Maneja enfrentamientos.</p>
-                <button onclick="cargarNode()">Consultar Combates</button>
-                <pre id="res-node">Haz clic en consultar...</pre>
-            </section>
-
-            <section class="card">
-                <h2>Go (Equipos) <span class="port-badge">:8004</span></h2>
-                <p>Maneja el registro de clanes.</p>
-                <button onclick="cargarGo()">Consultar Equipos</button>
-                <pre id="res-go">Haz clic en consultar...</pre>
-            </section>
-
-            <section class="card">
-                <h2>Java (Jugadores) <span class="port-badge">:8005</span></h2>
-                <p>Perfiles con MongoDB.</p>
-                <button onclick="cargarJava()">Listar Jugadores</button>
-                <pre id="res-java">Haz clic en listar...</pre>
+        <section class="card service-card">
+            <h2>Inscribir Equipo en Torneo</h2>
+            <p class="service-desc">Envía tu solicitud de inscripción al microservicio Python (:8000)</p>
+            
+            <form id="form-inscripcion" onsubmit="enviarInscripcion(event)" style="display: flex; flex-direction: column; gap: 12px; margin-top: 15px;">
+                <input type="number" id="torneoIdInput" placeholder="ID del Torneo (ej. 1)" required style="padding: 10px; background: #0d1117; border: 1px solid #30363d; color: #c9d1d9; border-radius: 6px;">
+                <input type="text" id="teamIdInput" placeholder="Nombre del Equipo / Clan" required style="padding: 10px; background: #0d1117; border: 1px solid #30363d; color: #c9d1d9; border-radius: 6px;">
                 
-                <h3 style="font-size: 0.95rem; margin-top: 15px; color: #58a6ff;">Registrar Jugador</h3>
-                <input type="text" id="nombre" placeholder="Nombre del jugador">
-                <input type="text" id="juego" placeholder="Juego o categoría">
-                <button onclick="crearJugador()">Guardar en MongoDB</button>
-            </section>
-        </main>
-    </div>
+                <button type="submit" class="btn-primary" style="padding: 10px; background-color: #238636; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: bold;">Solicitar Inscripción</button>
+            </form>
+            
+            <p id="mensaje-inscripcion" style="margin-top: 10px; font-size: 0.9rem;"></p>
+        </section>
+    </main>
 
-    <script src="auth.js"></script>
-    <script src="api.js"></script>
+    <footer class="footer">
+        Sistema Poliglota de Torneos - Arquitectura de Software 2026
+    </footer>
 </body>
 </html>
-    

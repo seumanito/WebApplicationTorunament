@@ -6,6 +6,12 @@ body {
     padding: 20px; 
 }
 
+.card {
+    background: #161b22;
+    border: 1px solid #30363d;
+    border-radius: 8px;
+}
+
 h1 { 
     text-align: center; 
     color: #58a6ff; 
@@ -63,16 +69,18 @@ input, button {
     border-radius: 6px; 
 }
 
-button { 
-    background: #238636; 
-    cursor: pointer; 
-    font-weight: bold; 
-    border: none;
-    transition: background 0.2s;
+.btn-primary {
+    background-color: #238636;
+    color: white;
+    padding: 12px 25px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: bold;
+    display: inline-block;
 }
 
-button:hover { 
-    background: #2ea043; 
+.btn-primary:hover {
+    background-color: #2ea043;
 }
 
 .port-badge { 
@@ -81,4 +89,10 @@ button:hover {
     color: #58a6ff; 
     padding: 2px 6px; 
     border-radius: 4px; 
+}
+
+.form-title {
+    font-size: 0.95rem;
+    margin-top: 15px;
+    color: #58a6ff;
 }
